@@ -16,15 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Post;
+import com.revature.entities.Views;
 import com.revature.services.PostService;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = "*", 
-methods = {RequestMethod.GET, RequestMethod.PUT, 
-			RequestMethod.PATCH, RequestMethod.POST},
-allowedHeaders = {"Content-Type", "authorization"})
+@CrossOrigin(origins = "*")
 public class PostController {
 
 	
@@ -32,6 +31,7 @@ public class PostController {
 	PostService postService;
 	
 	@GetMapping
+	@JsonView(Views.External.class)
 	public List<Post> getPosts(
 			@RequestParam(required = false) Integer userId,
 			@RequestParam(required = false) Integer eventId)  {

@@ -34,22 +34,22 @@ public class User{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-//	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	private String username;
 	
-//	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	@Column(name = "user_password")
 	private String userPassword;
 	
-//	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	@Column(name = "first_name")
 	private String firstName;
 	
-//	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	@Column(name = "last_name")
 	private String lastName;
 	
-//	@JsonView(Views.Internal.class)
+	@JsonView(Views.External.class)
 	@Email
 	private String email;
 	
@@ -79,10 +79,12 @@ public class User{
 		this.username = username;
 	}
 
+	@JsonIgnore
 	public String getUserPassword() {
 		return userPassword;
 	}
 
+	@JsonIgnore
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}

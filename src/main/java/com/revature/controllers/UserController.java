@@ -23,10 +23,7 @@ import com.revature.services.UserService;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*", 
-methods = {RequestMethod.GET, RequestMethod.PUT, 
-			RequestMethod.PATCH, RequestMethod.POST},
-allowedHeaders = {"Content-Type", "authorization"})
+@CrossOrigin(origins = "*")
 public class UserController {
 
 	@Autowired
