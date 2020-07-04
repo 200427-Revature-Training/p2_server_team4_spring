@@ -24,7 +24,7 @@ import com.revature.services.CommentService;
 @CrossOrigin(origins = "*", 
 methods = {RequestMethod.GET, RequestMethod.PUT, 
 			RequestMethod.PATCH, RequestMethod.POST},
-allowedHeaders = {"Content-Type"})
+allowedHeaders = {"Content-Type", "authorization"})
 public class CommentController {
 
 	@Autowired
