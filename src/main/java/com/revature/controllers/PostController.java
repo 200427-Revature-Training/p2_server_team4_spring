@@ -24,7 +24,7 @@ import com.revature.services.PostService;
 @CrossOrigin(origins = "*", 
 methods = {RequestMethod.GET, RequestMethod.PUT, 
 			RequestMethod.PATCH, RequestMethod.POST},
-allowedHeaders = {"Content-Type"})
+allowedHeaders = {"Content-Type", "authorization"})
 public class PostController {
 
 	

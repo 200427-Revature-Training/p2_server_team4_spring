@@ -26,7 +26,7 @@ import com.revature.services.EventService;
 @CrossOrigin(origins = "*", 
 methods = {RequestMethod.GET, RequestMethod.PUT, 
 			RequestMethod.PATCH, RequestMethod.POST},
-allowedHeaders = {"Content-Type"})
+allowedHeaders = {"Content-Type", "authorization"})
 public class EventController {
 
 	
