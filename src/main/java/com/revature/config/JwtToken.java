@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
+import com.revature.services.UserDetailsImpl;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -63,21 +65,22 @@ public class JwtToken implements Serializable {
     }
 
 
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetailsImpl userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
 
-        return doGenerateToken(claims, userDetails.getUsername());
+        return doGenerateToken(claims, userDetails.getUsername(), userDetails.getId(), userDetails.getEmail());
 
     }
 
 
-    private String doGenerateToken(Map<String, Object> claims, String subject) {
+    private String doGenerateToken(Map<String, Object> claims, String subject, int id, String email) {
 
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-
+        return Jwts.builder().setClaims(claims).setSubject(subject)
+        		.claim("id", id)
+        		.claim("email", email)
+        		.setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
-
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
 
     }
