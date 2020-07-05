@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.revature.services.JwtUserDetailsService;
+import com.revature.services.UserDetailsImpl;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -71,7 +72,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+            UserDetailsImpl userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
 
             if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
