@@ -1,5 +1,7 @@
 package com.revature.entities;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+
+
 
 @Entity
 @Table(name="users")
@@ -18,7 +22,7 @@ public class JwtUser {
 	private String username;
 	
 	@Column(name = "user_password")
-	private String userPassword;
+	private String password;
 	
 	@Column(name = "first_name")
 	private String firstName;
@@ -33,10 +37,10 @@ public class JwtUser {
 		
 	}
 
-	public JwtUser(String username, String userPassword, String firstName, String lastName, @Email String email) {
+	public JwtUser(String username, String password, String firstName, String lastName, @Email String email) {
 		super();
 		this.username = username;
-		this.userPassword = userPassword;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -58,12 +62,12 @@ public class JwtUser {
 		this.username = username;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setPassword(String userPassword) {
+		this.password = userPassword;
 	}
 
 	public String getFirstName() {
@@ -92,9 +96,9 @@ public class JwtUser {
 
 	@Override
 	public String toString() {
-		return "JwtUser [id=" + id + ", username=" + username + ", userPassword=" + userPassword + ", firstName="
+		return "JwtUser [id=" + id + ", username=" + username + ", userPassword=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + "]";
 	}
-	
+
 	
 }

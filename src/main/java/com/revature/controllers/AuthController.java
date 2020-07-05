@@ -6,7 +6,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,7 @@ import com.revature.entities.JwtRequest;
 import com.revature.entities.JwtResponse;
 
 import com.revature.services.JwtUserDetailsService;
+import com.revature.services.UserDetailsImpl;
 
 @RestController
 @CrossOrigin
@@ -39,13 +39,15 @@ public class AuthController {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
-        final UserDetails userDetails = jwtUserDetailsService
+        final UserDetailsImpl userDetails = jwtUserDetailsService
 
                 .loadUserByUsername(authenticationRequest.getUsername());
 
         final String token = jwtToken.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, userDetails.getId(), 
+				 userDetails.getUsername(), 
+				 userDetails.getEmail()));
 
     }
 
