@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Event;
 import com.revature.entities.User;
 
@@ -26,19 +27,24 @@ import com.revature.entities.User;
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.External.class)
 	private int id;
 	private String image;
 
+	@JsonView(Views.External.class)
 	@Column(name = "post_content")
 	private String postContent;
 	
+	@JsonView(Views.External.class)
 	@Column(name = "creation_time")
 	private LocalDate creationTime;
 	
+	@JsonView(Views.External.class)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "event_id")
 	private Event event;
 	
+	@JsonView(Views.External.class)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@JsonIgnoreProperties("events")
@@ -76,12 +82,11 @@ public class Post {
 		this.creationTime = creationTime;
 	}
 
-	@JsonIgnore
 	public Event getEvent() {
 		return event;
 	}
 
-	@JsonIgnore
+	
 	public void setEvent(Event event) {
 		this.event = event;
 	}
