@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.revature.entities.Post;
 import com.revature.entities.User;
 
@@ -24,22 +25,27 @@ public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(Views.External.class)
 	private int id;
 	private String image;
 	
 	@Column(name = "comment_content")
+	@JsonView(Views.External.class)
 	private String commentContent;
 	
 	@Column(name = "creation_time")
+	@JsonView(Views.External.class)
 	private LocalDate creationTime;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "post_id")
+	@JsonView(Views.External.class)
 	private Post post;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "user_id")
 	@JsonIgnoreProperties("events")
+	@JsonView(Views.External.class)
 	private User user;
 
 	public int getId() {
